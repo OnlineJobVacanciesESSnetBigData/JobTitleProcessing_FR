@@ -1,0 +1,23 @@
+# Don't track python cache and eggs files.
+__pycache__/
+*.pyc
+*.egg-info/
+pylintrc
+
+# Don't track ipython notebooks' checkpoints.
+.ipynb_checkpoints/
+
+# Don't track data
+data/
+
+# Don't track old folder
+old/
+
+# Don't track test scripts
+scripts_FR/
+
+# Don't track json files
+*.json
+
+# Don't track csv files
+*.csv
