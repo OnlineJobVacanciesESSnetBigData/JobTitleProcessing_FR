@@ -10,7 +10,6 @@ be fairly easy to add your own language.
 
 A Python 3 (>= 3.7) installation is required.
 
-
 You also have to download/ugrade following dependencies: 
 * Pandas (>= 1.0.5)
 * Numpy (>= 1.17.0 ; dependency of Pandas)
@@ -20,7 +19,6 @@ You also have to download/ugrade following dependencies:
 
 
 ### Installation
-
 
 To install the package, use the `setup.py` file in the main folder. You can install it in a develop mode.
 
@@ -38,8 +36,14 @@ python setup.py develop
 ### c. Train a SVM model
 
 
-test
+## General remarks
 
-Some ressources for French language can be found in 
-Training data and models are not shared for now, but main results for French case can be
- found in the [notebooks](https://github.com/OnlineJobVacanciesESSnetBigData/JobTitleProcessing_FR/tree/master/notebooks).
+Specific language ressources (stopwords, job related words, ...) must be uploaded [here](https://github.com/OnlineJobVacanciesESSnetBigData/JobTitleProcessing_FR/tree/master/job_title_processing/ressources_txt)
+Fench ressources can be used as an example of required format. 
+
+**Training data and models are not shared for now** but main results for French case can be
+found in the [notebooks](https://github.com/OnlineJobVacanciesESSnetBigData/JobTitleProcessing_FR/tree/master/notebooks).
+
+## Related publications
+
+*To be completed*
