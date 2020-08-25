@@ -40,4 +40,4 @@ python setup.py develop
 
 Some ressources for French language can be found in XXX.
 Training data and models are not shared for now, but main results for French case can be
- found in the [notebooks]().
+ found in the [notebooks](https://github.com/OnlineJobVacanciesESSnetBigData/JobTitleProcessing_FR/tree/master/notebooks).
