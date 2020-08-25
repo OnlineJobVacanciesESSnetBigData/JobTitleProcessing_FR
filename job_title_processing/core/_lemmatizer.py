@@ -35,17 +35,14 @@ class Lemmatizer():
 #        self.A_ahocorasick = self._init_automaton_ahocorasick()
 
     def _lemmatize_str(
-            self, text, lemmas, clean=True, regex=True, drop_duplicate=True, expr=True
+            self, text, clean=True, drop_duplicate=True, expr=True
             ):
         text = self.cleaner.clean_str(text) # Clean text
         tokens = [] # Lemmatize
         for word in text.split(' '):
-            if regex:
-                if word in self.lemmas.keys():
-                    word = self.lemmas[word]
-                tokens += [word]
-#            else:
-#                tokens += [self._lemmatize_str_ahocorasick(word)]
+            if word in self.lemmas.keys():
+                word = self.lemmas[word]
+            tokens += [word]
         if expr: # Replace lemmas ith a blank
             text = self.replace_expr(' '.join(tokens))
         tokens = text.split(' ')
@@ -53,8 +50,8 @@ class Lemmatizer():
             tokens = list(set(tokens))
         return ' '.join(tokens)
     
-    def lemmatize_str(self, text, clean=True, regex=True, drop_duplicate=True, expr=True):
-        return self._lemmatize_str(text, self.lemmas, clean, regex, drop_duplicate, expr)
+    def lemmatize_str(self, text, clean=True, drop_duplicate=True, expr=True):
+        return self._lemmatize_str(text, clean, drop_duplicate, expr)
 
     def get_lemmas_expr_re(self, dict_):
         dict_re = {
