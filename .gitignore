@@ -21,3 +21,11 @@ scripts_FR/
 
 # Don't track csv files
 *.csv
+
+# Don't track xml files
+*.xml
+
+# Don't track ressources except Python files
+ressources_txt/
+!ressources_txt/FR/lemmas_job_masc_fem.csv
+!ressources_txt/*.py
