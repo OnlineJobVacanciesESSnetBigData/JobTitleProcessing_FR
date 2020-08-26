@@ -27,6 +27,6 @@ scripts_FR/
 *.xml
 
 # Don't track FR ressources except Python files and specific files
-job_title_processing/ressources_txt/FR/**
-!job_title_processing/ressources_txt/FR/*.py
-!job_title_processing/ressources_txt/FR/lemmas_job_masc_fem.csv
+job_title_processing/ressources_txt/FR/lemmatizer/**
+
+!job_title_processing/ressources_txt/FR/lemmatizer/lemmas_job_masc_fem.csv

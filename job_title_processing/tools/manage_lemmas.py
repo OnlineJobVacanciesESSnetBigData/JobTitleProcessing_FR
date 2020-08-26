@@ -31,7 +31,7 @@ def manage_lemmas(language):
 def manage_lemmas_FR():
     """Agregate ressources as a list of dictionnaries."""
     ROOT_DIR = load_root_path()
-    fr_path = os.path.join(ROOT_DIR, "ressources_txt","FR")
+    fr_path = os.path.join(ROOT_DIR, "ressources_txt","FR", "lemmatizer")
     lemmas_list = [] # Init
     # 1. Use Morphalou dictionnary to nomalize words
     morphalou = _get_morphalou_FR(fr_path)
@@ -45,7 +45,7 @@ def manage_lemmas_FR():
     
     # 3. External ressources to get acronyms explicitations
     # TODO transform acronyms into a csv file
-    from job_title_processing.ressources_txt.FR.job import job_normalize_map
+    from job_title_processing.ressources_txt.FR.cleaner.job import job_normalize_map
     job_normalize_dict = {}
     for (t1, t2) in job_normalize_map:
         # TODO check if problem (similar keys)
@@ -109,7 +109,7 @@ def _get_morphalou_FR(fr_path, verbs=False):
                 '''*** \n'''
                 '''Please download Morphalou3.1_formatCSV folder available on'''
                 ''' https://www.ortolang.fr/market/lexicons/morphalou/4 \n''' 
-                '''Unzip it in job_title_processing\\job_title_processing\\ressources_txt\\FR \n'''
+                '''Unzip it in job_title_processing\\job_title_processing\\ressources_txt\\FR\\lemmatizer \n'''
                 '''***'''
               )
         return None
