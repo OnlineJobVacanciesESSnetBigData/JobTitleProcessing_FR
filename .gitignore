@@ -26,6 +26,9 @@ scripts_FR/
 # Don't track xml files
 *.xml
 
+# Don't track xl files
+*.xlsx
+
 # Don't track FR ressources except Python files and specific files
 job_title_processing/ressources_txt/FR/lemmatizer/**
 

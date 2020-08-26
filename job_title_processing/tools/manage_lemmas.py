@@ -147,7 +147,7 @@ def _get_fem_masc_lemmas_FR(fr_path):
     else:
         print(
                 '''*** \n'''
-                ''' Masculine/Feminine lemmas csv fil not found. \n'''
+                ''' Masculine/Feminine lemmas csv file not found. \n'''
                 '''***'''
               )
         return None
