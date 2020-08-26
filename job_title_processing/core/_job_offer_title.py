@@ -25,10 +25,10 @@ class JobOffersTitleCleaner(SeriesCleaner):
             * remove_csv         : csv with more words to remove 
                                    (to put in "ressources_txt")
             * remove_csv_colname : colname to use for remove_csv
-            * pickle             : file containing a pickle cleaner (in "pickle")
+            * pickle             : file containing a pickle cleaner (in "data")
         """
         ROOT_DIR = load_root_path()
-        self.lang_path = os.path.join(ROOT_DIR, "pickle", language)
+        self.lang_path = os.path.join(ROOT_DIR, "data", language)
         os.makedirs(self.lang_path) if not os.path.exists(self.lang_path) else None
         
         if pickle is not None and os.path.exists(os.path.join(self.lang_path, pickle)):
@@ -97,7 +97,7 @@ class JobOffersTitleLemmatizer(Lemmatizer):
         Dedicated lemmatizer for job offers titles:
             * language : implemented langage to look for src (str)
             * cleaner  : SeriesCleaner to use
-            * pickle   : file containing a pickle lemmatizer (in "pickle")
+            * pickle   : file containing a pickle lemmatizer (in "data")
         """
         ROOT_DIR = load_root_path()
         self.lang_path = os.path.join(ROOT_DIR, "pickle", language)
