@@ -22,6 +22,7 @@ class Lemmatizer():
         """
         if language is None and lemmas_list is None:
             raise ValueError("Lemmas and language can not be both None.")
+        # TODO put langage consideration into _job_offer_title.py
         if language is not None:
             # TODO check if language is implemented
             lemmas_list = manage_lemmas(language) 
@@ -98,10 +99,10 @@ class Lemmatizer():
             while (value in clean_dict.keys()):
                 value = clean_dict[value]
                 if value == key:
-                    print("Problem with " + str(key))
+#                    print("Problem with " + str(key))
                     break
             final_dict[key] = value
-        # 2. Treat multiple words values (//!\\ keys = 1 word only)
+        # 2. Treat multiple words values (//!\\ keys = 1 word only -> not so clear...)
         for key, value in final_dict.items():
             words = value.split(' ')
             if len(words) > 1:
@@ -113,7 +114,7 @@ class Lemmatizer():
         final_value = []
         for word in words:
             if word == key:
-                print('Redondant lemmas ' + str(key))
+#                print('Redondant lemmas ' + str(key))
                 break
             if word in dict_.keys():
                 value = dict_[word]

@@ -18,7 +18,7 @@ def manage_lemmas_expr(language):
         
 def manage_lemmas_expr_FR():
     """Get french lemmas expressions."""
-    from job_title_processing.ressources_txt.FR.job import job_lemmas_expr
+    from job_title_processing.ressources_txt.FR.cleaner.job import job_lemmas_expr
     return job_lemmas_expr
 
 def manage_lemmas(language):
@@ -42,6 +42,8 @@ def manage_lemmas_FR():
     masc_fem = _get_fem_masc_lemmas_FR(fr_path)
     if morphalou is not None:
         lemmas_list += [masc_fem]
+    else:
+        print("*** Continuing without Morphalou lemmas ***")
     
     # 3. External ressources to get acronyms explicitations
     # TODO transform acronyms into a csv file
@@ -60,6 +62,9 @@ def _get_morphalou_FR(fr_path, verbs=False):
     if not done already.
 
     Return a dictionnary with lemmas.
+    
+    Morphalou merges multiple ressources (including ressources generating
+    automatically), but we only takes lemmas from Morphalou itself.
     """
     morphalou_json = os.path.join(fr_path, "lemmas_morphalou.json")
     # Check if json file is already here
@@ -73,20 +78,33 @@ def _get_morphalou_FR(fr_path, verbs=False):
         print("*** Processing Morphalou files ***")
         # Process commun nouns csv
         noun_csv = os.path.join(morphalou_csv_folder, "commonNoun_Morphalou3.1_CSV.csv")
+#        nouns = pd.read_csv(
+#                noun_csv, sep=";", encoding="utf-8", skiprows=14, 
+#                low_memory=False, usecols=['LEMME', 'FLEXION', 'ORIGINES']
+#                )
+#        nouns.LEMME = nouns.LEMME.fillna(method='ffill')
+#        nouns = nouns.iloc[1:]
         nouns = pd.read_csv(
-                noun_csv, sep=";", encoding="utf-8", skiprows=14, 
-                low_memory=False, usecols=['LEMME', 'FLEXION']
+                noun_csv, sep=";", encoding="utf-8", skiprows=15,
+                low_memory=False, usecols=[0,8,9]
                 )
+        nouns.rename({"GRAPHIE":"LEMME", "GRAPHIE.1":"FLEXION"}, axis=1, inplace=True)
         nouns.LEMME = nouns.LEMME.fillna(method='ffill')
-        nouns = nouns.iloc[1:]
+        nouns.ORIGINES = nouns.ORIGINES.fillna(method='ffill')
+        mask_morphalou = nouns.ORIGINES.str.contains('morphalou')
+        nouns = nouns.loc[mask_morphalou].copy()
         # Process adjectives csv
         adj_csv = os.path.join(morphalou_csv_folder, "adjective_Morphalou3.1_CSV.csv")
-        adjectives = pd.read_csv(
-                adj_csv, sep=";", encoding="utf-8", skiprows=14, 
-                low_memory=False, usecols=['LEMME', 'FLEXION']
+        adjectives =  pd.read_csv(
+                adj_csv, sep=";", encoding="utf-8", skiprows=15,
+                low_memory=False, usecols=[0,8,9]
                 )
+        
+        adjectives.rename({"GRAPHIE":"LEMME", "GRAPHIE.1":"FLEXION"}, axis=1, inplace=True)
         adjectives.LEMME = adjectives.LEMME.fillna(method='ffill')
-        adjectives = adjectives.iloc[1:]
+        adjectives.ORIGINES = adjectives.ORIGINES.fillna(method='ffill')
+        mask_morphalou = adjectives.ORIGINES.str.contains('morphalou')
+        adjectives = adjectives.loc[mask_morphalou].copy()
         
         df = nouns.append(adjectives)
         lemmas_dict = dict(zip(df.FLEXION, df.LEMME))
@@ -109,7 +127,8 @@ def _get_morphalou_FR(fr_path, verbs=False):
                 '''*** \n'''
                 '''Please download Morphalou3.1_formatCSV folder available on'''
                 ''' https://www.ortolang.fr/market/lexicons/morphalou/4 \n''' 
-                '''Unzip it in job_title_processing\\job_title_processing\\ressources_txt\\FR\\lemmatizer \n'''
+                '''Unzip folder called Morphalou3.1_formatCSV in \n'''
+                '''job_title_processing\\job_title_processing\\ressources_txt\\FR\\lemmatizer \n'''
                 '''***'''
               )
         return None
