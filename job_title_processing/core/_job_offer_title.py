@@ -37,16 +37,16 @@ class JobOffersTitleCleaner(SeriesCleaner):
         else:
             if language == 'FR':
                 ### Load ressources - Location
-                from job_title_processing.ressources_txt.FR.location import (
+                from job_title_processing.ressources_txt.FR.cleaner.location import (
                     loc_departments, loc_countries, loc_regions, loc_others,
                     loc_replace_infirst
                     )
                 # Load ressources - classic stuff
-                from job_title_processing.ressources_txt.FR.default import (
+                from job_title_processing.ressources_txt.FR.cleaner.default import (
                     default_punctuation, default_stopwords, default_specialcharmap
                     )
                 # Load ressources - job related words
-                from job_title_processing.ressources_txt.FR.job import (
+                from job_title_processing.ressources_txt.FR.cleaner.job import (
                     jobwords, job_replace_infirst
                     #, job_normalize_map
                     )
@@ -64,7 +64,7 @@ class JobOffersTitleCleaner(SeriesCleaner):
             if remove_csv is not None:
                 # Read words to remove in csv file and add them
                 ROOT_DIR = load_root_path()
-                csv = os.path.join(ROOT_DIR, "ressources_txt", language, remove_csv)
+                csv = os.path.join(ROOT_DIR, "ressources_txt", language,"cleaner", remove_csv)
                 series_remove = pd.read_csv(csv, usecols=[remove_csv_colname])
                 remove_words += list(series_remove[remove_csv_colname])
             # Init str cleaner
