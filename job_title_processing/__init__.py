@@ -2,4 +2,7 @@
 """
 """
 
-from job_title_processing.core import JobOffersTitleCleaner, JobOffersTitleLemmatizer
+from job_title_processing.core import (
+        JobOffersTitleCleaner, JobOffersTitleLemmatizer, 
+        JobOffersTitleOccupationMatcher
+        )

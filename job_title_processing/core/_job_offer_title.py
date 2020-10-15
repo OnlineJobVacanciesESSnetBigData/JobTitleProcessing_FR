@@ -8,6 +8,8 @@ import pandas as pd
 from job_title_processing.core import SeriesCleaner
 from job_title_processing.core import Lemmatizer
 from job_title_processing.tools import load_root_path
+from job_title_processing.tools import predict_svm
+from job_title_processing.tools import get_nomenclature
 
 class JobOffersTitleCleaner(SeriesCleaner):
 
@@ -125,3 +127,54 @@ class JobOffersTitleLemmatizer(Lemmatizer):
             tmp_dict = pickle.load(f)
             f.close()
             self.__dict__.update(tmp_dict)
+            
+class JobOffersTitleOccupationMatcher():
+    # Only from French language
+    """Class to make it easier to match a dataframe containing job titles."""
+    
+    def __init__(self, lemmatizer, svm_model_file):
+        self.lemmatizer = lemmatizer
+        with open(svm_model_file, 'rb') as f:
+            self.svm =  pickle.load(f)
+            f.close()
+    
+    def match_job_title(self, text):
+        # Transform everything into a series
+        if type(text) == str:
+            series = pd.Series([text])
+        elif type(text) == list:
+            series = pd.Series(text)
+        elif type(text) == pd.core.series.Series:
+            series = text
+        else:
+            print("*** Provide handled datatype (str, list, pandas Series)***")
+            return None
+        match = pd.DataFrame()
+        match['Job offer title'] = series
+        lemmatized_txt = self.lemmatizer.lemmatize_series(series)
+        match['Clean and lemmatized text'] = lemmatized_txt
+        match['ROME occupation code'] = predict_svm(self.svm, lemmatized_txt)
+        # Retrieve class name
+        df_class_name = get_nomenclature('FR')
+        
+        res = pd.merge(
+                match, df_class_name, how='left', left_on='ROME occupation code', 
+                right_on="ROME_code"
+                ).drop("ROME_code", axis=1)
+        res.rename(
+                {
+                "ROME_text" : 'ROME label'
+                }, axis=1, inplace=True
+        )
+        return res
+        
+        
+            
+            
+            
+            
+            
+            
+            
+            
+            

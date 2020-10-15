@@ -20,7 +20,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 import matplotlib.pyplot as plt
 
-def split(X, Y, test_size=0.2, random_state=343265, folder=None):
+from job_title_processing.tools.occupation_nomenclature import get_nomenclature
+
+def split(X, Y, test_size=0.2, random_state=343265, folder=None, filename=None):
     
     X_train, X_test, Y_train, Y_test = train_test_split(
         X.tolist(), Y.tolist(), test_size=test_size,
@@ -38,8 +40,10 @@ def split(X, Y, test_size=0.2, random_state=343265, folder=None):
     if folder is not None:
         os.makedirs(folder) if not os.path.exists(folder) else None
         data = [X_train, X_test, Y_train, Y_test]
-        PIK = os.path.join(folder, "train_test.pickle")
-        with open(PIK, "wb") as f:
+        if filename is None:
+            filename = "train_test.pickle"
+        file = os.path.join(folder, filename)
+        with open(file, "wb") as f:
             pickle.dump(data, f)
 
     return X_train.tolist(), X_test.tolist(), Y_train.tolist(), Y_test.tolist()
@@ -48,7 +52,7 @@ def tokenize(text):
     tokens = nltk.word_tokenize(text)
     return tokens
 
-def train_svm(X_train, Y_train, folder=None, C=1, min_df=1):
+def train_svm(X_train, Y_train, folder=None, C=1, min_df=1, filename=None):
     svm = Pipeline([
         ('vectorize', CountVectorizer(tokenizer=tokenize, min_df=min_df)),
         ('svm', LinearSVC(C=C, max_iter=3000, verbose=True))
@@ -56,15 +60,17 @@ def train_svm(X_train, Y_train, folder=None, C=1, min_df=1):
     svm = svm.fit(X_train, Y_train)
     # Save model
     if folder is not None:
-        model_name = "svm" + "_C-" + str(C) + "_mindf-" + str(min_df) + ".pickle"
-        filename = os.path.join(folder, model_name)
-        with open(filename, 'wb') as f:
+        if filename is None:
+            filename = "svm" + "_C-" + str(C) + "_mindf-" + str(min_df) + ".pickle"
+        file = os.path.join(folder, filename)
+        with open(file, 'wb') as f:
             pickle.dump(svm, f)
             f.close()
     return svm
 
 def predict_svm(svm, X):
-    return svm.predict(X)
+    prediction = svm.predict(X)
+    return prediction
 
 def global_metrics_svm(Y_true, Y_pred, level=1):
     if level==2:

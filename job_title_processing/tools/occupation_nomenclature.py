@@ -6,9 +6,16 @@ Process external data on nomenclature to reuse it in the classifier.
 from job_title_processing.tools import load_root_path
 import pandas as pd
 import os
+import re
 
-def manage_nomanclature_FR():
-    """Get occupation code description, store it in csv file."""
+def get_nomenclature(langage='FR'):
+    if langage=='FR':
+        return get_nomenclature_ROME_FR()
+    else:
+        return None
+
+def get_nomenclature_ROME_FR():
+    """Get occupation ROME code description, store it in csv file."""
     ROOT_DIR = load_root_path()
     fr_path = os.path.join(ROOT_DIR, "ressources_txt","FR", "nomenclature")
     label_file = os.path.join(fr_path,"ROME_nomenclature.csv")
@@ -32,17 +39,20 @@ def manage_nomanclature_FR():
                 label_file, encoding="utf-8-sig", sep=";", index=False,
                 columns=['ROME_code', 'ROME_text']
                 )
-        return df
+        return df['ROME_code', 'ROME_text']
     else:
         print(
                 '''*** \n'''
                 '''Please download the 'Arborescence principale' file available on'''
-                ''' https://www.pole-emploi.org/opendata/repertoire-operationnel-des-meti.html?type=article \n''' 
-                '''Put in job_title_processing\\job_title_processing\\ressources_txt\\FR\\nomenclature \n'''
+                ''' https://www.pole-emploi.org/opendata/repertoire-operationnel-'''
+                '''des-meti.html?type=article \n''' 
+                '''Put the file 'ROME_ArboPrincipale.xlsx' in \n'''
+                '''job_title_processing\\job_title_processing\\ressources_txt'''
+                '''\\FR\\nomenclature \n'''
                 '''***'''
               )
         return None
-
+    
 def get_labels_ROME_FR():
     """
     Read job titles and matching occupation code from Pole Emploi data.
@@ -70,25 +80,16 @@ def get_labels_ROME_FR():
                 label_file, encoding="utf-8-sig", sep=";", index=False,
                 columns=['ROME', 'titre']
                 )
-        return df
+        return df['ROME', 'titre']
     else:
         print(
                 '''*** \n'''
                 '''Please download the 'Arborescence principale' file available on'''
-                ''' https://www.pole-emploi.org/opendata/repertoire-operationnel-des-meti.html?type=article \n''' 
-                '''Put in job_title_processing\\job_title_processing\\ressources_txt\\FR\\nomenclature \n'''
+                ''' https://www.pole-emploi.org/opendata/repertoire-operationnel-'''
+                '''des-meti.html?type=article \n''' 
+                '''Put the file 'ROME_ArboPrincipale.xlsx' in \n'''
+                '''job_title_processing\\job_title_processing\\ressources_txt'''
+                '''\\FR\\nomenclature \n'''
                 '''***'''
               )
         return None
-    
-def get_map_ROME_FAP_FR(file_name=None):
-    # TODO
-    return None
-
-def get_map_ROME_NAF_FR():
-    # TODO
-    return None
-
-def get_map_ROME_ISCO_FR():
-    # TODO
-    return None
