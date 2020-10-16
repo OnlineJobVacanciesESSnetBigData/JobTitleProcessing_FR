@@ -65,9 +65,30 @@ spyder
 
 Then you can import `job_title_processing` from Spyder as any other package.
 
-## Ressources (French)
+## Resources (French)
 
-*To be completed*
+Package works without following ressources, but using them will improve its 
+performance for Frecnh language.
+
+### Lemmatization resources
+
+This package makes use of an external resource to conduct lemmatization, i.e. the
+task of associating word forms in a text with a reference lemma.
+
+To perform lemmatization, Morphalou corpus is used. It is a corpus covering
+the French language, available [here](https://www.ortolang.fr/market/lexicons/morphalou/4). 
+Its use requires you to download morphalou 4 (or 3.1) and unzip folder called 
+Morphalou3.1_formatCSV in `ressources_txt\FR\lemmatizer` folder.
+
+Please note that this resource is distributed under its own license,
+which you should read and abide by in your usage.
+
+### Taxonomy resources
+
+In order to match ROME occupation codes to their official names, download 
+Pôle Emploi's ROME taxonomy available [here](https://www.pole-emploi.org/opendata/repertoire-operationnel-des-meti.html?type=article).
+Put the file named `ROME_ArboPrincipale.xlsx` in `ressources_txt\FR\nomenclature` folder
+(you must create this folder).
 
 ## Implementing text processing tools
 
