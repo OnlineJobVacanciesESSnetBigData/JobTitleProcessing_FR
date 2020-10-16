@@ -84,7 +84,7 @@ def global_metrics_svm(Y_true, Y_pred, level=1):
             )
     df = pd.DataFrame(report).transpose()
     print("Accuracy : " + str(metrics.accuracy_score(Y_true, Y_pred)))
-    print(df.loc[['micro avg','macro avg','weighted avg']])
+    print(df.loc[['macro avg','weighted avg']])
 
 def group_by_accuracy(
         df, group_by, Y_test_col="Y_test", Y_pred_col="Y_pred", 
