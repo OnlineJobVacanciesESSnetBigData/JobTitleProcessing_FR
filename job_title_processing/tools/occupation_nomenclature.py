@@ -39,7 +39,7 @@ def get_nomenclature_ROME_FR():
                 label_file, encoding="utf-8-sig", sep=";", index=False,
                 columns=['ROME_code', 'ROME_text']
                 )
-        return df['ROME_code', 'ROME_text']
+        return df[['ROME_code', 'ROME_text']]
     else:
         print(
                 '''*** \n'''
@@ -80,7 +80,7 @@ def get_labels_ROME_FR():
                 label_file, encoding="utf-8-sig", sep=";", index=False,
                 columns=['ROME', 'titre']
                 )
-        return df['ROME', 'titre']
+        return df[['ROME', 'titre']]
     else:
         print(
                 '''*** \n'''
