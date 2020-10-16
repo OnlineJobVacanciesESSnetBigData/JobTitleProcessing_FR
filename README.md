@@ -34,6 +34,7 @@ You also have to download/ugrade following dependencies:
 * Pandas (>= 1.1.1)
 * Nltk (>=3.4)
 * Sklearn (>= 0.23.2)
+* Xlrd (>= 1.0.0)
 
 To install the previous libraries using `conda`, simply type the following commands in a
 command line (on a Linux system, it may be necessary to preceed each command
@@ -44,6 +45,7 @@ conda install matplotlib
 conda install pandas
 conda install nltk
 conda install scikit-learn
+conda install xlrd
 ```
 
 ### Installation
@@ -79,6 +81,9 @@ conda install ipykernel
 python -m ipykernel install --user --name myenv --display-name "Python 3 (myenv)"
 jupyter notebook
 ```
+
+Once jupyter is launched, please check you are using the desired kernel. You can
+change it in Kernel >> Change kernel. 
 
 ## General remarks
 
