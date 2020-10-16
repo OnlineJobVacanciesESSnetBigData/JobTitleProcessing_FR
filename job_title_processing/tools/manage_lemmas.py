@@ -125,7 +125,7 @@ def _get_morphalou_FR(fr_path, verbs=False):
     else:
         print(
                 '''*** \n'''
-                '''Please download Morphalou3.1_formatCSV folder available on'''
+                '''Please download morphalou 4 or 3.1 on'''
                 ''' https://www.ortolang.fr/market/lexicons/morphalou/4 \n''' 
                 '''Unzip folder called Morphalou3.1_formatCSV in \n'''
                 '''job_title_processing\\job_title_processing\\ressources_txt\\FR\\lemmatizer \n'''
