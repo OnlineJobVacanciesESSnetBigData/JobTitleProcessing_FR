@@ -156,11 +156,14 @@ class JobOffersTitleOccupationMatcher():
         match['ROME occupation code'] = predict_svm(self.svm, lemmatized_txt)
         # Retrieve class name
         df_class_name = get_nomenclature('FR')
-        
-        res = pd.merge(
-                match, df_class_name, how='left', left_on='ROME occupation code', 
-                right_on="ROME_code"
-                ).drop("ROME_code", axis=1)
+        if df_class_name is not None:
+            res = pd.merge(
+                    match, df_class_name, how='left', left_on='ROME occupation code', 
+                    right_on="ROME_code"
+                    ).drop("ROME_code", axis=1)
+        else:
+            res = match.copy()
+            print("*** Continuing without matching ROME code to ROME labels. ***")
         res.rename(
                 {
                 "ROME_text" : 'ROME label'

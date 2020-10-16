@@ -37,13 +37,13 @@ def manage_lemmas_FR():
     morphalou = _get_morphalou_FR(fr_path)
     if morphalou is not None:
         lemmas_list += [morphalou]
+    else:
+        print("*** Continuing without Morphalou lemmas ***")
 
     # 2. External ressources to get feminine version of job titles
     masc_fem = _get_fem_masc_lemmas_FR(fr_path)
-    if morphalou is not None:
+    if masc_fem is not None:
         lemmas_list += [masc_fem]
-    else:
-        print("*** Continuing without Morphalou lemmas ***")
     
     # 3. External ressources to get acronyms explicitations
     # TODO transform acronyms into a csv file
@@ -143,7 +143,7 @@ def _get_fem_masc_lemmas_FR(fr_path):
     # Look for masculine/feminine csv file
     masc_fem_csv = os.path.join(fr_path, "lemmas_job_masc_fem.csv")
     if os.path.exists(masc_fem_csv):
-        print("*** Processing Masculine/Feminine lemmas file ***")
+        print("*** Processing Male / Female job nouns file ***")
         # Process commun nouns csv
         masc_fem = pd.read_csv(
                 masc_fem_csv, sep=";", encoding="utf-8", usecols=['LEMME', 'FLEXION']
@@ -161,12 +161,12 @@ def _get_fem_masc_lemmas_FR(fr_path):
         # Get json file
         with open(masc_fem_json, 'w', encoding="utf-8-sig") as f:
             json.dump(lemmas_dict, f, ensure_ascii=False)
-        print("*** Successfully processed Masculine/Feminine lemmas files ***")
+        print("*** Successfully processed Male / Female job nouns files ***")
         return lemmas_dict
     else:
         print(
                 '''*** \n'''
-                ''' Masculine/Feminine lemmas csv file not found. \n'''
+                ''' Male / Female job nouns csv file not found. \n'''
                 '''***'''
               )
         return None
