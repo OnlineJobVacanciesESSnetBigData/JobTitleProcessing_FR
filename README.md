@@ -118,6 +118,8 @@ found in the [notebooks](https://github.com/OnlineJobVacanciesESSnetBigData/JobT
 
 Package was designed on the behalf of Dares ([dares.travail-emploi.gouv.fr](https://dares.travail-emploi.gouv.fr/dares-etudes-et-statistiques/)) which is the division of Research, Economic analysis and Statistics of the French Ministry of Labour.
 
+Main author : Claire de Maricourt
+
 ## Related publications
 
 *To be completed*
