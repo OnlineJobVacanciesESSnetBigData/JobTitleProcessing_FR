@@ -68,7 +68,7 @@ Then you can import `job_title_processing` from Spyder as any other package.
 ## Resources (French)
 
 Package works without following ressources, but using them will improve its 
-performance for Frecnh language.
+performance for French language.
 
 ### Lemmatization resources
 
@@ -122,4 +122,4 @@ Main author : Claire de Maricourt
 
 ## Related publications
 
-*To be completed*
+Analysis of French OJAs scraped in 2019 (in French): [Online job advertisements, a new data source on labour market](https://dares.travail-emploi.gouv.fr/publication/les-offres-demploi-en-ligne-nouvelle-source-de-donnees-sur-le-marche-du-travail)

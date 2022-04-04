@@ -22,6 +22,8 @@ scripts_FR/
 # Don't track csv files
 *.csv
 # !lemmas_job_masc_fem.csv
+!ROME_label.csv
+!ROME_nomenclature.csv
 
 # Don't track xml files
 *.xml
