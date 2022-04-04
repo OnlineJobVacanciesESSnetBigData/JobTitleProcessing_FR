@@ -122,5 +122,6 @@ Main author : Claire de Maricourt
 
 ## Related publications
 
-Analysis of French OJAs scraped in 2019 (in French): [Online job advertisements, a new data source on labour market](https://dares.travail-emploi.gouv.fr/publication/les-offres-demploi-en-ligne-nouvelle-source-de-donnees-sur-le-marche-du-travail)
-Methodological report of ESSnet Big Data 2: [Methodological framework for processing online job adverts data](https://ec.europa.eu/eurostat/cros/content/wpb-milestones-and-deliverables-0_en)
+* Analysis of French OJAs scraped in 2019 (in French): [Online job advertisements, a new data source on labour market](https://dares.travail-emploi.gouv.fr/publication/les-offres-demploi-en-ligne-nouvelle-source-de-donnees-sur-le-marche-du-travail)
+
+* Methodological report of ESSnet Big Data 2: [Methodological framework for processing online job adverts data](https://ec.europa.eu/eurostat/cros/content/wpb-milestones-and-deliverables-0_en)
